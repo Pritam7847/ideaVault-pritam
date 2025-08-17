@@ -29,7 +29,6 @@ It helps creators, students, entrepreneurs, and innovators to gather feedback, r
 - **Frontend:** React + Tailwind CSS  
 - **Backend:** Node.js + Express.js  
 - **Database:** MongoDB  
-- **Authentication:** JWT / OAuth  
-- **Hosting:** Vercel / Render / Netlify  
+
 
 ---
