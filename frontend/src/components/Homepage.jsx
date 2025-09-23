@@ -6,7 +6,7 @@ function Homepage() {
   return (
     <>
       <div>
-        <div className="text-center justify-center mt-10 sm:mt-20 md:mt-32 px-4">
+        <div className="text-center justify-center mt-10 sm:mt-20 md:mt-56 px-4">
           <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl">
             Welcome to{" "}
             <span className="text-red-500 glow-text">
@@ -30,7 +30,7 @@ function Homepage() {
             />
           </p>
           <br />
-          <p className="text-xl text-center justify-center sm:text-3xl md:text-2xl">Scroll For More Info👇</p>
+          {/* <p className="text-xl text-center justify-center sm:text-3xl md:text-2xl">Scroll For More Info👇</p> */}
         </div>
       </div>
 
@@ -48,7 +48,7 @@ function Homepage() {
 
 
 
-      <div className="ml-10 mr-10 mt-10 sm:mt-20 md:mt-32">
+      <div className="ml-10 mr-10 mt-10 sm:mt-20 md:mt-96">
         <section className="mt-16 text-left text-gray-800 space-y-8 text-base sm:text-lg">
           <h2 className="text-2xl font-semibold mb-4">What is IdeaVault?</h2>
           <p>

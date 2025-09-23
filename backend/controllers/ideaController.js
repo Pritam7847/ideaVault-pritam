@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Idea from "../model/ideaModel.js"; // Ensure correct path
 
 // POST - Submit idea with optional image
@@ -75,5 +76,32 @@ export const addComment = async (req, res) => {
     res.json(idea);
   } catch (error) {
     res.status(500).json({ message: "Error adding comment", error: error.message });
+  }
+};
+
+// DELETE - Delete idea
+
+export const deleteIdea = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    console.log("Deleting idea with ID:", id);
+
+    // Validate ObjectId properly
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid idea ID" });
+    };
+
+    const deleted = await Idea.findByIdAndDelete(id);
+
+    if (!deleted) {
+      console.log("Idea not found in DB");
+      return res.status(404).json({ message: "Idea not found" });
+    }
+
+    res.status(200).json({ message: "Idea deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting idea:", error);
+    res.status(500).json({ message: "Error deleting idea", error: error.message });
   }
 };

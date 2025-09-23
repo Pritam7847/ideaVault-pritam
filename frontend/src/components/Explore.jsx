@@ -5,6 +5,7 @@ export default function Explore() {
   const [loading, setLoading] = useState(true);
   const [commentText, setCommentText] = useState({}); // store comment per idea
 
+  // Fetch all ideas
   useEffect(() => {
     fetch("http://localhost:5000/api/ideas")
       .then((res) => {
@@ -21,26 +22,29 @@ export default function Explore() {
       });
   }, []);
 
+  // Handle upvote
   const handleUpvote = (id) => {
     fetch(`http://localhost:5000/api/ideas/${id}/upvote`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((updatedIdea) => {
         setIdeas((prev) =>
           prev.map((idea) => (idea._id === id ? updatedIdea : idea))
         );
-      });
+      })
+      .catch((err) => console.error("Upvote error:", err));
   };
 
+  // Handle add comment
   const handleAddComment = (id) => {
     if (!commentText[id]?.trim()) return;
 
     fetch(`http://localhost:5000/api/ideas/${id}/comment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ comment: commentText[id] })
+      body: JSON.stringify({ comment: commentText[id] }),
     })
       .then((res) => res.json())
       .then((updatedIdea) => {
@@ -48,8 +52,33 @@ export default function Explore() {
           prev.map((idea) => (idea._id === id ? updatedIdea : idea))
         );
         setCommentText((prev) => ({ ...prev, [id]: "" }));
-      });
+      })
+      .catch((err) => console.error("Comment error:", err));
   };
+
+  // Handle delete idea
+ const handleDelete = async (id) => {
+  try {
+    console.log("Deleting ID:", id); // Debug log
+
+    const res = await fetch(`http://localhost:5000/api/ideas/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData.message || `Failed to delete idea (status ${res.status})`);
+    }
+
+    const data = await res.json();
+    console.log("Delete response:", data);
+
+    // Remove from frontend
+    setIdeas((prev) => prev.filter((idea) => idea._id !== id));
+  } catch (error) {
+    console.error("Error in delete:", error.message);
+  }
+};
 
   if (loading)
     return (
@@ -72,9 +101,19 @@ export default function Explore() {
             className="bg-white rounded-xl shadow-md mb-8 hover:shadow-xl transition-shadow duration-300"
           >
             <div className="p-6">
-              <h2 className="text-xl font-semibold mb-3 text-gray-900">
-                {idea.title}
-              </h2>
+              <div className="flex justify-between items-start">
+                <h2 className="text-xl font-semibold mb-3 text-gray-900">
+                  {idea.title}
+                </h2>
+                {/* Delete button */}
+                <button
+                  className="text-red-600 hover:text-red-800 font-semibold"
+                  onClick={() => handleDelete(idea._id)}
+                >
+                  Delete
+                </button>
+              </div>
+
               <p className="text-gray-700 mb-5 leading-relaxed">
                 {idea.description}
               </p>
@@ -121,10 +160,10 @@ export default function Explore() {
                   onChange={(e) =>
                     setCommentText((prev) => ({
                       ...prev,
-                      [idea._id]: e.target.value
+                      [idea._id]: e.target.value,
                     }))
                   }
-                  className="flex-grow border text-white border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                  className="flex-grow border border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                 />
                 <button
                   className="bg-blue-600 text-white px-5 py-2 rounded-r-lg hover:bg-blue-700 transition-colors duration-200"

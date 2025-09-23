@@ -9,18 +9,20 @@ import Explore from './components/Explore';
 function App() {
   return (
     <>
-    <div className='min-h-screen bg-white text-black'>
-      <Navbar />
+      <div className="min-h-screen bg-white text-black">
+        <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/submit" element={<Submit />} />
-        <Route path="/explore" element={<Explore />} />
-      </Routes>
 
-      <Footer />
-    </div>
-      
+        <div className="pt-20">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/submit" element={<Submit />} />
+            <Route path="/explore" element={<Explore />} />
+          </Routes>
+        </div>
+
+        <Footer />
+      </div>
     </>
   );
 }
