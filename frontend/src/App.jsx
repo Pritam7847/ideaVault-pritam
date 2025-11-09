@@ -5,12 +5,15 @@ import Submit from './components/Submit';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Explore from './components/Explore';
+import Signup from './components/Signup';
+import { Toaster } from 'react-hot-toast';
+
 
 function App() {
   return (
     <>
       <div className="min-h-screen bg-white text-black">
-        <Navbar />
+        {/* <Navbar /> */}
 
 
         <div className="pt-20">
@@ -18,10 +21,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/submit" element={<Submit />} />
             <Route path="/explore" element={<Explore />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
+          <Toaster/>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

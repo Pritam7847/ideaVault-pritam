@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Login from "./Login";
+import Logout from "./Logout";
+import { useAuth } from "../context/AuthProvider";
 
 function Navbar() {
+  const [authUser, setAuthUser] = useAuth();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -49,9 +53,18 @@ function Navbar() {
           <ul className="menu menu-horizontal px-1">{navItem}</ul>
         </div>
 
-        <div className="navbar-end">
-          <a className="btn">Login</a>
-        </div>
+        {
+          authUser?(<Logout />):(
+          <div className="navbar-end">
+            <button
+                onClick={() => document.getElementById('my_modal_3').showModal()}
+                className="text-white"
+              >
+              </button>
+              <Login />
+            </div>
+        )}
+
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import ideaRoutes from "./routes/ideaRoutes.js";
 import dotenv from "dotenv";
 import cors from "cors";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api", ideaRoutes);
+app.use("/user", userRoutes);
 
 // DB Connection
 mongoose

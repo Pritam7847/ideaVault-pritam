@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Submit = () => {
   const [formData, setFormData] = useState({
@@ -49,6 +51,7 @@ const Submit = () => {
 
   return (
     <>
+    <Navbar />
       <div className="p-6 mt-10">
         <h1 className="text-2xl font-bold mb-4">
           Here, This is an Idea Submission for Students
@@ -124,6 +127,7 @@ const Submit = () => {
           </button>
         </form>
       </div>
+      <Footer />
     </>
   );
 };

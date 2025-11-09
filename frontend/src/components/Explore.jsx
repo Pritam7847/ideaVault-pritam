@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export default function Explore() {
   const [ideas, setIdeas] = useState([]);
@@ -88,6 +90,9 @@ export default function Explore() {
     );
 
   return (
+
+    <>
+    <Navbar />
     <div className="p-6 max-w-3xl mx-auto">
       <h1 className="text-3xl font-extrabold mb-8 text-gray-900 tracking-wide">
         Explore Ideas
@@ -177,5 +182,8 @@ export default function Explore() {
         ))
       )}
     </div>
+    <Footer />
+    </>
+    
   );
 }
