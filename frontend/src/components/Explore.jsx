@@ -7,7 +7,7 @@ export default function Explore() {
   const [ideas, setIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [commentText, setCommentText] = useState({});
-  const [ratings, setRatings] = useState({}); // store AI ratings per idea
+  // const [ratings, setRatings] = useState({}); // store AI ratings per idea
 
   // Fetch all ideas from backend
   useEffect(() => {
@@ -27,19 +27,19 @@ export default function Explore() {
   }, []);
 
   // 🔹 Function to fetch AI rating from backend
-  const handleAIRate = async (id, title, description) => {
-    try {
-      setRatings(prev => ({ ...prev, [id]: "Loading..." }));
+  // const handleAIRate = async (id, title, description) => {
+  //   try {
+  //     setRatings(prev => ({ ...prev, [id]: "Loading..." }));
 
-      const ideaText = `Title: ${title}\nDescription: ${description}`;
-      const res = await axios.post("http://localhost:5000/api/rate", { ideaText });
+  //     const ideaText = `Title: ${title}\nDescription: ${description}`;
+  //     const res = await axios.post("http://localhost:5000/api/rate", { ideaText });
 
-      setRatings(prev => ({ ...prev, [id]: res.data.rating }));
-    } catch (err) {
-      console.error("AI Rating Error:", err.message);
-      setRatings(prev => ({ ...prev, [id]: "Rating unavailable" }));
-    }
-  };
+  //     setRatings(prev => ({ ...prev, [id]: res.data.rating }));
+  //   } catch (err) {
+  //     console.error("AI Rating Error:", err.message);
+  //     setRatings(prev => ({ ...prev, [id]: "Rating unavailable" }));
+  //   }
+  // };
 
   // Handle upvote
   const handleUpvote = (id) => {
@@ -137,7 +137,7 @@ export default function Explore() {
                 </p>
 
                 {/* ✅ AI Rating */}
-                <p className="text-green-600 font-semibold mb-3">
+                {/* <p className="text-green-600 font-semibold mb-3">
                   {ratings[idea._id] || "Not rated yet"}
                 </p>
                 <button
@@ -145,7 +145,7 @@ export default function Explore() {
                   onClick={() => handleAIRate(idea._id, idea.title, idea.description)}
                 >
                   Get AI Rating
-                </button>
+                </button> */}
 
                 <div className="flex items-center justify-between text-sm text-gray-500 mb-5">
                   <button
