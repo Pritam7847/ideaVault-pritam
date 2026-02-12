@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import toast from "react-hot-toast";
 
 const Submit = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +37,7 @@ const Submit = () => {
         throw new Error("Failed to submit idea");
       }
 
-      alert("Idea submitted successfully!");
+      toast.success("Idea submitted successfully!");
       setFormData({
         name: "",
         email: "",
@@ -45,7 +46,7 @@ const Submit = () => {
       });
     } catch (error) {
       console.error(error);
-      alert("Error submitting idea. Please try again.");
+      toast.error("Error submitting idea. Please try again.");
     }
   };
 
